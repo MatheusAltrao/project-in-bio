@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-  @apply bg-background-primary text-content-heading ; 
+  @apply bg-background-primary text-white;
 }
