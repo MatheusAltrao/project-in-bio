@@ -3,6 +3,7 @@ import ProjectCard from "../components/commons/project-card";
 import TotalVisits from "../components/commons/total-visits";
 import UserCard from "../components/commons/user-card";
 import Button from "../components/ui/button";
+import Link from "next/link";
 
 interface ProfilePageProps {
   params: { profileId: string };
@@ -17,12 +18,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         <span className="text-content-body">
           Você esta usando a versão trial.
         </span>
-        <Button
-          variant="primary"
+        <Link
+          href={`/${profileId}/upgrade`}
           className="font-bold text-accent-green underline"
         >
           Faça um upgrade
-        </Button>
+        </Link>
       </div>
       <div className="flex h-screen flex-col items-center justify-center gap-8 overflow-hidden p-20">
         <div className="flex h-[610px] items-center justify-center gap-10">
