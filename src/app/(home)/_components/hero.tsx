@@ -1,3 +1,4 @@
+import ProjectCard from "@/app/components/commons/project-card";
 import TotalVisits from "@/app/components/commons/total-visits";
 import UserCard from "@/app/components/commons/user-card";
 import Button from "@/app/components/ui/button";
@@ -27,15 +28,15 @@ const Hero = () => {
         <div className="h-full w-full bg-[radial-gradient(circle_at_40%_40%,#4B2DBB,transparent_50%)]">
           <div className="relative flex w-full items-center justify-center">
             <UserCard />
-            <div className="absolute bottom-0 right-0">
+            <div className="absolute -bottom-[8%] right-0">
               <TotalVisits />
             </div>
 
-            <div className="absolute -left-[45%] top-[20%] -z-10">
-              {/* <ProjectCard />  */}
+            <div className="absolute -left-[20%] bottom-[10%] -z-10">
+              <ProjectCard />
             </div>
-            <div className="absolute -left-[55%] top-[5%] -z-10">
-              {/*     <ProjectCard />  */}
+            <div className="absolute -top-[20%] right-0">
+              <ProjectCard />
             </div>
           </div>
         </div>
