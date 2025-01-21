@@ -1,14 +1,22 @@
+import { manageAuthAction } from '@/action/auth/manage-auth-action'
 import Button from '@/app/components/ui/button'
+import { auth } from '@/lib/auth'
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth()
+  console.log(session)
+
   return (
     <header>
       <nav className="flex items-center justify-between">
         <h1 className="text-3xl font-light">ProjectsInBio</h1>
 
         <div className="flex items-center gap-2">
-          <Button>Minha página</Button>
-          <Button variant="secondary">Sair</Button>
+          {session && <Button>Minha página</Button>}
+
+          <form action={manageAuthAction}>
+            <Button>{session ? 'Sair' : 'Entrar'}</Button>
+          </form>
         </div>
       </nav>
     </header>
