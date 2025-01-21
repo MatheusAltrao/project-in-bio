@@ -1,25 +1,17 @@
+import Button from "@/app/components/ui/button";
 import Link from "next/link";
 
-const Header = () => {
+export default function Header() {
   return (
     <header>
       <nav className="flex items-center justify-between">
-        <ul className="flex items-center gap-2 text-sm">
-          <li>
-            <Link href={""}>Inicio</Link>{" "}
-          </li>
-          <li>Preço</li>
-          <li>FAQ</li>
-        </ul>
+        <h1 className="text-3xl font-light">ProjectsInBio</h1>
 
-        <div>Links</div>
-
-        <div>
-          <h2>logo</h2>
+        <div className="flex items-center gap-2">
+          <Button>Minha página</Button>
+          <Button variant="secondary">Sair</Button>
         </div>
       </nav>
     </header>
   );
-};
-
-export default Header;
+}

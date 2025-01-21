@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        "whitespace-nowrap rounded-xl p-2 font-bold text-white transition-opacity hover:opacity-80 disabled:opacity-60",
+        "whitespace-nowrap rounded-md px-4 py-2 font-bold text-white transition-opacity hover:opacity-80 disabled:opacity-60",
         variant === "primary" && "bg-accent-purple",
         variant === "secondary" && "bg-background-tertiary",
         variant === "tertiary" && "border border-border-primary",
