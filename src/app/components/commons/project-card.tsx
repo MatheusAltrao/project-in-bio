@@ -1,6 +1,6 @@
 export default function ProjectCard() {
   return (
-    <div className="flex gap-4 rounded-xl border border-border-secondary bg-background-secondary p-2">
+    <div className="flex h-[110px] gap-4 rounded-xl border border-border-secondary bg-background-secondary p-2">
       <div className="size-20">
         <img
           className="h-full w-full rounded-xl object-cover"

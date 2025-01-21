@@ -2,7 +2,7 @@ import { TrendingUp } from "lucide-react";
 
 export default function TotalVisits() {
   return (
-    <div className="flex items-center justify-center gap-4 rounded-xl border border-border-secondary bg-background-secondary px-4 py-3">
+    <div className="flex w-full max-w-[400px] items-center justify-center gap-4 rounded-xl border border-border-secondary bg-background-secondary px-4 py-3">
       <p className="text-nowrap text-xl font-bold text-content-body">
         Total de visitas
       </p>
