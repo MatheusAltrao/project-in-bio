@@ -1,5 +1,5 @@
-import Header from "@/app/(home)/_components/header";
-import Button from "@/app/components/ui/button";
+import Header from '@/app/(home)/_components/header'
+import Button from '@/app/components/ui/button'
 
 export default function UpagradePage() {
   return (
@@ -15,5 +15,5 @@ export default function UpagradePage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

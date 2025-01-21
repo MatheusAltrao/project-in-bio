@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
 export default function Textarea(
   props: React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -11,5 +11,5 @@ export default function Textarea(
         props.className,
       )}
     />
-  );
+  )
 }

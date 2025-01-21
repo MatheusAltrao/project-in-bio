@@ -1,5 +1,5 @@
-import Header from "./(home)/_components/header";
-import Hero from "./(home)/_components/hero";
+import Header from './(home)/_components/header'
+import Hero from './(home)/_components/hero'
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <Header />
       <Hero />
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { TrendingUp } from "lucide-react";
+import { TrendingUp } from 'lucide-react'
 
 export default function TotalVisits() {
   return (
@@ -16,5 +16,5 @@ export default function TotalVisits() {
         <button>sair</button>
       </div> */}
     </div>
-  );
+  )
 }

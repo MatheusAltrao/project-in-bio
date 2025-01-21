@@ -1,7 +1,7 @@
-import { Plus, Rocket } from "lucide-react";
-import Header from "../(home)/_components/header";
-import TextInput from "../components/ui/text-input";
-import Button from "../components/ui/button";
+import { Plus, Rocket } from 'lucide-react'
+import Header from '../(home)/_components/header'
+import TextInput from '../components/ui/text-input'
+import Button from '../components/ui/button'
 
 export default function CriarPage() {
   return (
@@ -18,8 +18,8 @@ export default function CriarPage() {
             <span>project.bio.com/</span>
             <TextInput />
             <Button>
-              {" "}
-              <Plus size={20} /> Criar{" "}
+              {' '}
+              <Plus size={20} /> Criar{' '}
             </Button>
           </div>
         </form>
@@ -28,5 +28,5 @@ export default function CriarPage() {
         </span>
       </div>
     </div>
-  );
+  )
 }

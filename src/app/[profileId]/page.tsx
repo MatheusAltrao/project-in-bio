@@ -1,16 +1,15 @@
-import { Plus } from "lucide-react";
-import ProjectCard from "../components/commons/project-card";
-import TotalVisits from "../components/commons/total-visits";
-import UserCard from "../components/commons/user-card";
-import Button from "../components/ui/button";
-import Link from "next/link";
+import { Plus } from 'lucide-react'
+import ProjectCard from '../components/commons/project-card'
+import TotalVisits from '../components/commons/total-visits'
+import UserCard from '../components/commons/user-card'
+import Link from 'next/link'
 
 interface ProfilePageProps {
-  params: { profileId: string };
+  params: { profileId: string }
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
-  const { profileId } = await params;
+  const { profileId } = await params
 
   return (
     <div>
@@ -51,5 +50,5 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import ProjectCard from "@/app/components/commons/project-card";
-import TotalVisits from "@/app/components/commons/total-visits";
-import UserCard from "@/app/components/commons/user-card";
-import Button from "@/app/components/ui/button";
-import TextInput from "@/app/components/ui/text-input";
+import ProjectCard from '@/app/components/commons/project-card'
+import TotalVisits from '@/app/components/commons/total-visits'
+import UserCard from '@/app/components/commons/user-card'
+import Button from '@/app/components/ui/button'
+import TextInput from '@/app/components/ui/text-input'
 
 const Hero = () => {
   return (
@@ -42,7 +42,7 @@ const Hero = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
