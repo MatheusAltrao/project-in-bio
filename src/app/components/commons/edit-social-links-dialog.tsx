@@ -13,7 +13,19 @@ import Button from '../ui/button'
 import createSocialLinksAction from '@/action/social-links/create-social-links-action'
 import { useParams, useRouter } from 'next/navigation'
 
-export function EditSocialLinksDialog() {
+interface EditSocialLinksDialogProps {
+  socialMedias?: {
+    facebook: string
+    github: string
+    instagram: string
+    linkedin: string
+    twitter: string
+  }
+}
+
+export function EditSocialLinksDialog({
+  socialMedias,
+}: EditSocialLinksDialogProps) {
   const router = useRouter()
   const params = useParams()
   const profileId = params.profileId as string
@@ -21,11 +33,11 @@ export function EditSocialLinksDialog() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSaveing, setIsSaving] = useState(false)
 
-  const [github, setGithub] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [twitter, setTwitter] = useState('')
-  const [linkedin, setLinkedin] = useState('')
+  const [github, setGithub] = useState(socialMedias?.github || '')
+  const [facebook, setFacebook] = useState(socialMedias?.facebook || '')
+  const [instagram, setInstagram] = useState(socialMedias?.instagram || '')
+  const [twitter, setTwitter] = useState(socialMedias?.twitter || '')
+  const [linkedin, setLinkedin] = useState(socialMedias?.linkedin || '')
 
   const handleAddSocialLinks = async () => {
     setIsSaving(true)

@@ -9,9 +9,14 @@ import {
 import Button from '../ui/button'
 import Image from 'next/image'
 import { EditSocialLinksDialog } from './edit-social-links-dialog'
-export default function UserCard() {
-  const icons = [Facebook, Github, Instagram, Linkedin, Twitter]
+import { ProfileProps } from '@/action/user/get-profile-data-action'
+import Link from 'next/link'
 
+interface UserCardProps {
+  profile?: ProfileProps
+}
+
+export default function UserCard({ profile }: UserCardProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-5 rounded-3xl border-white border-opacity-10 bg-[#121212] p-8">
       <div className="size-48">
@@ -28,22 +33,64 @@ export default function UserCard() {
         <div className="flex items-center gap-2">
           <h3 className="text-3xl font-bold">Matheus Altrão</h3>
         </div>
-        <p className="opacity-40">Eu faço produtos para a internet</p>
+        <p className="opacity-40">Resolvo os seus problemas com JS</p>
       </div>
 
       <div className="flex w-full flex-col gap-2">
         <span className="text-xs font-medium uppercase">Links</span>
+
         <div className="flex gap-3">
-          {icons.map((Icon, index) => (
-            <button
-              key={index}
+          {profile?.socialMedias?.github && (
+            <Link
+              target="_blank"
+              href={profile?.socialMedias?.github}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Icon />
-            </button>
-          ))}
+              <Github />{' '}
+            </Link>
+          )}
 
-          <EditSocialLinksDialog />
+          {profile?.socialMedias?.facebook && (
+            <Link
+              target="_blank"
+              href={profile?.socialMedias?.facebook}
+              className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
+            >
+              <Facebook />{' '}
+            </Link>
+          )}
+
+          {profile?.socialMedias?.instagram && (
+            <Link
+              target="_blank"
+              href={profile?.socialMedias?.instagram}
+              className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
+            >
+              <Instagram />{' '}
+            </Link>
+          )}
+
+          {profile?.socialMedias?.linkedin && (
+            <Link
+              target="_blank"
+              href={profile?.socialMedias?.linkedin}
+              className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
+            >
+              <Linkedin />{' '}
+            </Link>
+          )}
+
+          {profile?.socialMedias?.twitter && (
+            <Link
+              target="_blank"
+              href={profile?.socialMedias?.twitter}
+              className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
+            >
+              <Twitter />{' '}
+            </Link>
+          )}
+
+          <EditSocialLinksDialog socialMedias={profile?.socialMedias} />
         </div>
       </div>
 

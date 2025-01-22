@@ -6,6 +6,14 @@ export interface ProfileProps {
   userId: string
   createdAt: string
   totalVisits: number
+  socialMedias?: {
+    facebook: string
+    github: string
+    instagram: string
+    linkedin: string
+    twitter: string
+  }
+  updatedAt: number | undefined
 }
 
 export async function getProfileDataAction(profileId: string) {

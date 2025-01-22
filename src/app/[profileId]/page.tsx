@@ -42,7 +42,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
       <div className="flex h-screen w-full mx-auto max-w-[1000px]  flex-col items-center justify-center gap-8 overflow-hidden py-20 px-4">
         <div className="flex h-[610px]  w-full items-center justify-center gap-10">
-          <UserCard />
+          <UserCard profile={profileData} />
           <div className="flex h-[610px] w-full flex-col content-start gap-4">
             <NewProjectDialog isOwer={isOwer} profileId={profileId} />
             <div className="flex flex-col gap-4 overflow-y-auto">
