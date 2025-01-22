@@ -7,13 +7,14 @@ import {
   Plus,
   Twitter,
 } from 'lucide-react'
-import { useState } from 'react'
+import { startTransition, useState } from 'react'
 import Modal from '../ui/modal'
 import Button from '../ui/button'
 import createSocialLinksAction from '@/action/social-links/create-social-links-action'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
 export function EditSocialLinksDialog() {
+  const router = useRouter()
   const params = useParams()
   const profileId = params.profileId as string
 
@@ -36,7 +37,12 @@ export function EditSocialLinksDialog() {
       twitter,
       linkedin,
     })
-    setIsSaving(false)
+
+    startTransition(() => {
+      setIsSaving(false)
+      setIsOpen(false)
+      router.refresh()
+    })
   }
 
   return (
