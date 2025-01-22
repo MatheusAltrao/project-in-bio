@@ -37,7 +37,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         <div className="flex h-[610px] items-center justify-center gap-10">
           <UserCard />
           <div className="flex h-[610px] flex-col content-start gap-4">
-            <NewProjectDialog profileId="" />
+            <NewProjectDialog profileId={profileId} />
             <div className="flex flex-col gap-4 overflow-y-auto">
               <ProjectCard />
               <ProjectCard />
