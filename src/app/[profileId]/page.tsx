@@ -3,6 +3,9 @@ import ProjectCard from '../components/commons/project-card'
 import TotalVisits from '../components/commons/total-visits'
 import UserCard from '../components/commons/user-card'
 import Link from 'next/link'
+import { getProfileDataAction } from '@/action/user/get-profile-data-action'
+import { notFound } from 'next/navigation'
+import { auth } from '@/lib/auth'
 
 interface ProfilePageProps {
   params: Promise<{ profileId: string }>
@@ -10,6 +13,12 @@ interface ProfilePageProps {
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { profileId } = await params
+  const profileData = await getProfileDataAction(profileId)
+  const session = await auth()
+
+  if (!profileData) return notFound()
+
+  const isOwer = profileData.userId === session?.user?.id
 
   return (
     <div>
@@ -45,9 +54,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             </div>
           </div>
         </div>
-        <div>
-          <TotalVisits />
-        </div>
+        {isOwer && <TotalVisits />}
       </div>
     </div>
   )
