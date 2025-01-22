@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import NewProjectDialog from '../components/commons/new-project-dialog'
 import getProfileProjectsAction from '@/action/project/get-profile-projects-action'
+import { getDownloadURLFromPath } from '@/lib/firebase'
 
 interface ProfilePageProps {
   params: Promise<{ profileId: string }>
@@ -45,13 +46,19 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <div className="flex h-[610px] w-full flex-col content-start gap-4">
             <NewProjectDialog isOwer={isOwer} profileId={profileId} />
             <div className="flex flex-col gap-4 overflow-y-auto">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  isOwner={isOwer}
-                />
-              ))}
+              {projects.map(async (project) => {
+                const image =
+                  (await getDownloadURLFromPath(project.imagePath)) || ''
+
+                return (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    image={image}
+                    isOwner={isOwer}
+                  />
+                )
+              })}
             </div>
           </div>
         </div>
