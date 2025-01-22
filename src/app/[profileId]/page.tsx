@@ -1,3 +1,4 @@
+'use server'
 import ProjectCard from '../components/commons/project-card'
 import TotalVisits from '../components/commons/total-visits'
 import UserCard from '../components/commons/user-card'
@@ -6,19 +7,21 @@ import { getProfileDataAction } from '@/action/user/get-profile-data-action'
 import { notFound } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import NewProjectDialog from '../components/commons/new-project-dialog'
+import getProfileProjectsAction from '@/action/project/get-profile-projects-action'
 
 interface ProfilePageProps {
   params: Promise<{ profileId: string }>
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
-  const { profileId } = await params
-  const profileData = await getProfileDataAction(profileId)
   const session = await auth()
+  const { profileId } = await params
 
+  const profileData = await getProfileDataAction(profileId)
   if (!profileData) return notFound()
 
   const isOwer = profileData.userId === session?.user?.id
+  const projects = await getProfileProjectsAction(profileId)
 
   return (
     <div>
@@ -39,16 +42,11 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <div className="flex h-[610px] flex-col content-start gap-4">
             <NewProjectDialog profileId={profileId} />
             <div className="flex flex-col gap-4 overflow-y-auto">
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
+             
+              {projects.map((project)=>(
+                <ProjectCard key={project.id} project={project} isOwner={isOwer} />
+              ))}
+            
             </div>
           </div>
         </div>
