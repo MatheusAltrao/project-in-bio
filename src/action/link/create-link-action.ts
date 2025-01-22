@@ -1,3 +1,4 @@
+'use server'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/firebase'
 import { Timestamp } from 'firebase-admin/firestore'

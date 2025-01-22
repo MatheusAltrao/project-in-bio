@@ -28,7 +28,8 @@ export default function CreateLinkForm() {
 
     const isLinkCreated = await createLinkAction(link)
 
-    if (!isLinkCreated) return setError('Erro ao criar o link')
+    if (!isLinkCreated)
+      return setError('Erro ao criar o link, tente novamente mais tarde')
 
     router.push(`/${link}`)
   }
