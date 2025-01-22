@@ -24,29 +24,34 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const projects = await getProfileProjectsAction(profileId)
 
   return (
-    <div  >
-      <div className="flex w-full items-center justify-center gap-1 bg-background-secondary py-2 text-center">
-        <span className="text-content-body">
-          Você esta usando a versão trial.
-        </span>
-        <Link
-          href={`/${profileId}/upgrade`}
-          className="font-bold text-accent-green underline"
-        >
-          Faça um upgrade
-        </Link>
-      </div>
+    <div>
+      {isOwer && (
+        <div className="flex w-full items-center justify-center gap-1 bg-background-secondary py-2 text-center">
+          <span className="text-content-body">
+            Você esta usando a versão trial.
+          </span>
+          <Link
+            href={`/${profileId}/upgrade`}
+            className="font-bold text-accent-green underline"
+          >
+            Faça um upgrade
+          </Link>
+        </div>
+      )}
+
       <div className="flex h-screen w-full mx-auto max-w-[1000px]  flex-col items-center justify-center gap-8 overflow-hidden py-20 px-4">
         <div className="flex h-[610px]  w-full items-center justify-center gap-10">
           <UserCard />
           <div className="flex h-[610px] w-full flex-col content-start gap-4">
-            <NewProjectDialog profileId={profileId} />
+            <NewProjectDialog isOwer={isOwer} profileId={profileId} />
             <div className="flex flex-col gap-4 overflow-y-auto">
-             
-              {projects.map((project)=>(
-                <ProjectCard key={project.id} project={project} isOwner={isOwer} />
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  isOwner={isOwer}
+                />
               ))}
-            
             </div>
           </div>
         </div>

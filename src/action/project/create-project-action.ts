@@ -28,13 +28,13 @@ export async function createProjectAction(formData: FormData) {
     return false
   }
 
-  const generatedId = randomUUID();
+  const generatedId = randomUUID()
 
-  const storageRef = storage.file(`project-images/${profileId}/${generatedId}`);
+  const storageRef = storage.file(`project-images/${profileId}/${generatedId}`)
   const arrayBuffer = await file.arrayBuffer()
   const buffer = Buffer.from(arrayBuffer)
   await storageRef.save(buffer)
-  const imagePath = storageRef.name;
+  const imagePath = storageRef.name
 
   try {
     await db

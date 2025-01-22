@@ -12,9 +12,13 @@ import { useRouter } from 'next/navigation'
 
 interface NewProjectDialogProps {
   profileId: string
+  isOwer: boolean
 }
 
-export default function NewProjectDialog({ profileId }: NewProjectDialogProps) {
+export default function NewProjectDialog({
+  profileId,
+  isOwer,
+}: NewProjectDialogProps) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [projectName, setProjectName] = useState('')
@@ -63,8 +67,10 @@ export default function NewProjectDialog({ profileId }: NewProjectDialogProps) {
     })
   }
 
+  if (!isOwer) return null
+
   return (
-    <div className='w-full' >
+    <div className="w-full">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex min-h-[110px] w-full items-center justify-center gap-2 rounded-md border border-border-secondary bg-background-secondary transition-colors hover:border-border-tertiary hover:bg-background-tertiary"
