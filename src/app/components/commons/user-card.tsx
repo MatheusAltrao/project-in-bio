@@ -8,8 +8,9 @@ import {
 } from 'lucide-react'
 import Button from '../ui/button'
 import Image from 'next/image'
+import { EditSocialLinksDialog } from './edit-social-links-dialog'
 export default function UserCard() {
-  const icons = [Facebook, Github, Instagram, Linkedin, Twitter, Plus]
+  const icons = [Facebook, Github, Instagram, Linkedin, Twitter]
 
   return (
     <div className="flex flex-col items-center justify-center gap-5 rounded-3xl border-white border-opacity-10 bg-[#121212] p-8">
@@ -41,6 +42,8 @@ export default function UserCard() {
               <Icon />
             </button>
           ))}
+
+          <EditSocialLinksDialog />
         </div>
       </div>
 

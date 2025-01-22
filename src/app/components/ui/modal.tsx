@@ -17,7 +17,9 @@ export default function Modal({ children, isOpen, setIsOpen }: ModalProps) {
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-background-secondary/60 flex items-center justify-center backdrop-blur-md z-50 ">
-      <div ref={ref}>{children}</div>
+      <div className="w-full max-w-[700px] " ref={ref}>
+        {children}
+      </div>
     </div>
   )
 }
