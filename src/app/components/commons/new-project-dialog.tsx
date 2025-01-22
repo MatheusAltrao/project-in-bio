@@ -64,7 +64,7 @@ export default function NewProjectDialog({ profileId }: NewProjectDialogProps) {
   }
 
   return (
-    <div>
+    <div className='w-full' >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex min-h-[110px] w-full items-center justify-center gap-2 rounded-md border border-border-secondary bg-background-secondary transition-colors hover:border-border-tertiary hover:bg-background-tertiary"
