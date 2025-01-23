@@ -11,6 +11,7 @@ import Image from 'next/image'
 import { EditSocialLinksDialog } from './edit-social-links-dialog'
 import { ProfileProps } from '@/action/user/get-profile-data-action'
 import Link from 'next/link'
+import { AddCustomLinkDialog } from './add-custom-link-dialog'
 
 interface UserCardProps {
   profile?: ProfileProps
@@ -37,7 +38,7 @@ export default function UserCard({ profile }: UserCardProps) {
       </div>
 
       <div className="flex w-full flex-col gap-2">
-        <span className="text-xs font-medium uppercase">Links</span>
+        <span className="text-xs font-medium uppercase">Mídias</span>
 
         <div className="flex gap-3">
           {profile?.socialMedias?.github && (
@@ -94,12 +95,11 @@ export default function UserCard({ profile }: UserCardProps) {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-2">
-        <Button>Sass de gerenciamento financeiro</Button>
-
-        <button className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]">
-          <Plus />
-        </button>
+      <div className="flex w-full flex-col gap-2">
+        <span className="text-xs font-medium uppercase">Outros</span>
+        <div className="flex flex-col items-center justify-center gap-2">
+          <AddCustomLinkDialog />
+        </div>
       </div>
     </div>
   )
