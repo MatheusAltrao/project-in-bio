@@ -1,6 +1,7 @@
 'use server'
 
 import { db } from '@/lib/firebase'
+import { LinkProps } from '../link/add-custom-link-action'
 
 export interface ProfileProps {
   userId: string
@@ -13,6 +14,9 @@ export interface ProfileProps {
     linkedin: string
     twitter: string
   }
+  link1?: LinkProps
+  link2?: LinkProps
+  link3?: LinkProps
   updatedAt: number | undefined
 }
 

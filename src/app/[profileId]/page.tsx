@@ -25,7 +25,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const projects = await getProfileProjectsAction(profileId)
 
   return (
-    <div>
+    <div className="min-h-screen w-full space-y-8 ">
       {isOwer && (
         <div className="flex w-full items-center justify-center gap-1 bg-background-secondary py-2 text-center">
           <span className="text-content-body">
@@ -40,8 +40,14 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         </div>
       )}
 
-      <div className="flex h-screen w-full mx-auto max-w-[1000px]  flex-col items-center justify-center gap-8 overflow-hidden py-20 px-4">
-        <div className="flex h-[610px]  w-full items-center justify-center gap-10">
+      {isOwer && (
+        <div className=" flex items-center justify-center  ">
+          <TotalVisits />
+        </div>
+      )}
+
+      <div className="flex w-full mx-auto max-w-[1000px] flex-col gap-4 p-4">
+        <div className="grid grid-cols-2  w-full  gap-10">
           <UserCard profile={profileData} />
           <div className="flex h-[610px] w-full flex-col content-start gap-4">
             <NewProjectDialog isOwer={isOwer} profileId={profileId} />
@@ -62,7 +68,6 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             </div>
           </div>
         </div>
-        {isOwer && <TotalVisits />}
       </div>
     </div>
   )

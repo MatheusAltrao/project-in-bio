@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        'flex items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 font-bold text-white transition-opacity hover:opacity-80 disabled:opacity-60',
+        'flex items-center justify-center w-full gap-2 whitespace-nowrap rounded-xl px-4 py-2 font-bold text-white transition-opacity hover:opacity-80 disabled:opacity-60',
         variant === 'primary' && 'bg-accent-purple',
         variant === 'secondary' && 'bg-background-tertiary',
         variant === 'tertiary' && 'border border-border-primary',
