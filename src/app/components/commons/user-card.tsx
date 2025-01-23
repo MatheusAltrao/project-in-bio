@@ -12,6 +12,7 @@ import { EditSocialLinksDialog } from './edit-social-links-dialog'
 import { ProfileProps } from '@/action/user/get-profile-data-action'
 import Link from 'next/link'
 import { AddCustomLinkDialog } from './add-custom-link-dialog'
+import { formattedUrl } from '@/lib/utils'
 
 interface UserCardProps {
   profile?: ProfileProps
@@ -95,25 +96,31 @@ export default function UserCard({ profile }: UserCardProps) {
         </div>
       </div>
 
-      <div className="flex w-full flex-col gap-2">
-        <span className="text-xs font-medium uppercase">Outros</span>
-        {profile?.link1 && (
-          <Link className="w-full" target="_blank" href={profile?.link1.url}>
-            <Button>{profile.link1.title}</Button>
-          </Link>
-        )}
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col gap-2">
+          <span className="text-xs font-medium uppercase">Outros</span>
+          {profile?.link1 && (
+            <Link
+              className="w-full"
+              target="_blank"
+              href={formattedUrl(profile?.link1.url)}
+            >
+              <Button>{profile.link1.title}</Button>
+            </Link>
+          )}
 
-        {profile?.link2 && (
-          <Link target="_blank" href={profile?.link2.url}>
-            <Button>{profile.link2.title}</Button>
-          </Link>
-        )}
+          {profile?.link2 && (
+            <Link target="_blank" href={formattedUrl(profile?.link2.url)}>
+              <Button>{profile.link2.title}</Button>
+            </Link>
+          )}
 
-        {profile?.link3 && (
-          <Link target="_blank" href={profile?.link3.url}>
-            <Button>{profile.link3.title}</Button>
-          </Link>
-        )}
+          {profile?.link3 && (
+            <Link target="_blank" href={formattedUrl(profile?.link3.url)}>
+              <Button>{profile.link3.title}</Button>
+            </Link>
+          )}
+        </div>
         <div className="flex flex-col items-center justify-center gap-2">
           <AddCustomLinkDialog />
         </div>
