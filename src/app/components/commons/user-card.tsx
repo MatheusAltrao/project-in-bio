@@ -46,7 +46,7 @@ export default function UserCard({ profile, isOwner }: UserCardProps) {
       <div className="flex w-full flex-col gap-2">
         <span className="text-xs font-medium uppercase">Mídias</span>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2">
           {profile?.socialMedias?.github && (
             <Link
               target="_blank"
