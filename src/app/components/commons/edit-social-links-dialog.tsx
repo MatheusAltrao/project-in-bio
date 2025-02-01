@@ -59,12 +59,9 @@ export function EditSocialLinksDialog({
 
   return (
     <div className="w-full">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
-      >
-        <Plus />
-      </button>
+      <Button onClick={() => setIsOpen(true)}>
+        <Plus /> Adicionar
+      </Button>
 
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className=" flex flex-col gap-10 ">

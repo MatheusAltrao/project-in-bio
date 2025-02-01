@@ -14,15 +14,26 @@ import {
 } from "@/lib/utils";
 import { useParams, useRouter } from "next/navigation";
 import { saveProfileAction } from "@/action/user/save-profile-data-action";
+import { ProfileProps } from "@/action/user/get-profile-data-action";
 
-export default function EditUserCardDialog() {
+interface EditUserCardDialogProps {
+  profile?: ProfileProps;
+  profileImage: string;
+}
+
+export default function EditUserCardDialog({
+  profile,
+  profileImage,
+}: EditUserCardDialogProps) {
   const { profileId } = useParams();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
-  const [yourName, setYourName] = useState<string>("");
-  const [yourDescription, setYourDescription] = useState<string>("");
+  const [yourName, setYourName] = useState<string>(profile?.name || "");
+  const [yourDescription, setYourDescription] = useState<string>(
+    profile?.description || ""
+  );
 
   async function handleSaveProfile() {
     setIsSaving(true);

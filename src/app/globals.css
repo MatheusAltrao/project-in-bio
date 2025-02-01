@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.input {
+  @apply w-full flex items-center gap-2   rounded-xl border border-transparent bg-background-secondary p-2 text-white placeholder:text-content-placeholder hover:border-border-secondary active:border-border-tertiary;
+}
 
-.input{
-    @apply w-full flex items-center gap-2   rounded-xl border border-transparent bg-background-secondary p-2 text-white placeholder:text-content-placeholder hover:border-border-secondary active:border-border-tertiary
+.button-link {
+  @apply rounded-xl flex font-medium items-center gap-2 w-full bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E];
 }
