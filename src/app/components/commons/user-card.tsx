@@ -5,37 +5,42 @@ import {
   Linkedin,
   Twitter,
   Plus,
-} from 'lucide-react'
-import Button from '../ui/button'
-import Image from 'next/image'
-import { EditSocialLinksDialog } from './edit-social-links-dialog'
-import { ProfileProps } from '@/action/user/get-profile-data-action'
-import Link from 'next/link'
-import { AddCustomLinkDialog } from './add-custom-link-dialog'
-import { formattedUrl } from '@/lib/utils'
+} from "lucide-react";
+import Button from "../ui/button";
+import Image from "next/image";
+import { EditSocialLinksDialog } from "./edit-social-links-dialog";
+import { ProfileProps } from "@/action/user/get-profile-data-action";
+import Link from "next/link";
+import { AddCustomLinkDialog } from "./add-custom-link-dialog";
+import { formattedUrl } from "@/lib/utils";
+import EditUserCardDialog from "./edit-user-card-dialog";
 
 interface UserCardProps {
-  profile?: ProfileProps
+  profile?: ProfileProps;
+  isOwner: boolean;
 }
 
-export default function UserCard({ profile }: UserCardProps) {
+export default function UserCard({ profile, isOwner }: UserCardProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-5 rounded-3xl border-white border-opacity-10 bg-[#121212] p-8">
-      <div className="size-48">
-        <Image
-          width={200}
-          height={200}
-          src={'/perfil.jpeg'}
-          alt="Matheus"
-          className="h-full w-full rounded-full object-cover"
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <h3 className="text-3xl font-bold">Matheus Altrão</h3>
+      <div className="flex flex-col items-center justify-center gap-2 w-full ">
+        <div className="size-48">
+          <Image
+            width={200}
+            height={200}
+            src={"/perfil.jpeg"}
+            alt="Matheus"
+            className="h-full w-full rounded-full object-cover"
+          />
         </div>
-        <p className="opacity-40">Resolvo os seus problemas com JS</p>
+
+        <div className="flex items-center flex-col  justify-center">
+          <div className="flex items-center gap-2">
+            <h3 className="text-3xl font-bold">Matheus Altrão</h3>
+            {isOwner && <EditUserCardDialog />}
+          </div>
+          <p className="opacity-40">Resolvo os seus problemas com JS</p>
+        </div>
       </div>
 
       <div className="flex w-full flex-col gap-2">
@@ -48,7 +53,7 @@ export default function UserCard({ profile }: UserCardProps) {
               href={profile?.socialMedias?.github}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Github />{' '}
+              <Github />{" "}
             </Link>
           )}
 
@@ -58,7 +63,7 @@ export default function UserCard({ profile }: UserCardProps) {
               href={profile?.socialMedias?.facebook}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Facebook />{' '}
+              <Facebook />{" "}
             </Link>
           )}
 
@@ -68,7 +73,7 @@ export default function UserCard({ profile }: UserCardProps) {
               href={profile?.socialMedias?.instagram}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Instagram />{' '}
+              <Instagram />{" "}
             </Link>
           )}
 
@@ -78,7 +83,7 @@ export default function UserCard({ profile }: UserCardProps) {
               href={profile?.socialMedias?.linkedin}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Linkedin />{' '}
+              <Linkedin />{" "}
             </Link>
           )}
 
@@ -88,11 +93,13 @@ export default function UserCard({ profile }: UserCardProps) {
               href={profile?.socialMedias?.twitter}
               className="rounded-xl bg-[#1E1E1E] p-3 hover:bg-[#2E2E2E]"
             >
-              <Twitter />{' '}
+              <Twitter />{" "}
             </Link>
           )}
 
-          <EditSocialLinksDialog socialMedias={profile?.socialMedias} />
+          {isOwner && (
+            <EditSocialLinksDialog socialMedias={profile?.socialMedias} />
+          )}
         </div>
       </div>
 
@@ -121,10 +128,12 @@ export default function UserCard({ profile }: UserCardProps) {
             </Link>
           )}
         </div>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <AddCustomLinkDialog />
-        </div>
+        {isOwner && (
+          <div className="flex flex-col items-center justify-center gap-2">
+            <AddCustomLinkDialog />
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }
