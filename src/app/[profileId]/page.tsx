@@ -9,6 +9,7 @@ import { auth } from "@/lib/auth";
 import NewProjectDialog from "../components/commons/new-project-dialog";
 import getProfileProjectsAction from "@/action/project/get-profile-projects-action";
 import { getDownloadURLFromPath } from "@/lib/firebase";
+import { increaseProfileVisitsAction } from "@/action/user/increase-profile-visits-action";
 
 interface ProfilePageProps {
   params: Promise<{ profileId: string }>;
@@ -23,6 +24,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   const isOwer = profileData.userId === session?.user?.id;
   const projects = await getProfileProjectsAction(profileId);
+
+  if (!isOwer) {
+    await increaseProfileVisitsAction(profileId);
+  }
+
+  console.log(projects);
 
   return (
     <div className="min-h-screen w-full space-y-8 ">
@@ -42,7 +49,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
       {isOwer && (
         <div className=" flex items-center justify-center  ">
-          <TotalVisits />
+          <TotalVisits visits={profileData.totalVisits} />
         </div>
       )}
 
