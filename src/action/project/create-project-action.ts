@@ -21,8 +21,6 @@ export async function createProjectAction(formData: FormData) {
     return false;
   }
 
-  console.log({ profileId, projectName, projectUrl, projectDescription, file });
-
   if (!profileId || !projectName || !projectUrl || !projectDescription) {
     console.error("One or more required fields are missing");
     return false;

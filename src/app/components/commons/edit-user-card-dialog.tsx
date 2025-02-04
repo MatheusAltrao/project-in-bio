@@ -54,10 +54,6 @@ export default function EditUserCardDialog({
     formData.append("yourName", yourName);
     formData.append("yourDescription", yourDescription);
 
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-
     await saveProfileAction(formData);
 
     startTransition(() => {
