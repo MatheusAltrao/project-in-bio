@@ -1,13 +1,12 @@
 "use client";
 import { ProjectProps } from "@/action/project/get-profile-projects-action";
 import { increaseProjectVisitsAction } from "@/action/project/increase-project-visits-action";
-import { formattedUrl } from "@/lib/utils";
+import { formatUrl } from "@/lib/utils";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { use } from "react";
 
 interface ProjectCardProps {
-  project: ProjectProps;
+  project?: ProjectProps;
   isOwner: boolean;
   image: string;
 }
@@ -18,15 +17,18 @@ export default function ProjectCard({
   image,
 }: ProjectCardProps) {
   const { profileId } = useParams();
-  const projectUrl = project.projectUrl;
-  const url = formattedUrl(projectUrl);
+  const projectUrl = project?.projectUrl || "";
+  const url = formatUrl(projectUrl);
 
   async function handleClick() {
-    if (!profileId || project.id) {
-      console.log(" project.id", project.id);
+    if (!profileId || project?.id) {
+      console.log(" project.id", project?.id);
       console.log("profileId:", profileId);
     }
-    await increaseProjectVisitsAction(profileId as string, project.id);
+    await increaseProjectVisitsAction(
+      profileId as string,
+      project?.id as string
+    );
   }
 
   return (
@@ -37,7 +39,7 @@ export default function ProjectCard({
             <img
               className="h-full w-full rounded-xl object-cover"
               src={image}
-              alt={project.projectName}
+              alt={project?.projectName}
             />
           </div>
         ) : (
@@ -47,14 +49,14 @@ export default function ProjectCard({
         <div className="space-y-1">
           {isOwner && (
             <span className="text-xs font-bold uppercase text-accent-green">
-              {project.totalVisits?.toString().padStart(2, "0") || 0} cliques
+              {project?.totalVisits?.toString().padStart(2, "0") || 0} cliques
             </span>
           )}
 
           <div>
-            <h2 className="text-xl font-bold">{project.projectName}</h2>
+            <h2 className="text-xl font-bold">{project?.projectName}</h2>
             <span className="text-sm text-content-body line-clamp-2">
-              {project.projectDescription}
+              {project?.projectDescription}
             </span>
           </div>
         </div>

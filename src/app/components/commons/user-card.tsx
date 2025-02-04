@@ -12,9 +12,9 @@ import { EditSocialLinksDialog } from "./edit-social-links-dialog";
 import { ProfileProps } from "@/action/user/get-profile-data-action";
 import Link from "next/link";
 import { AddCustomLinkDialog } from "./add-custom-link-dialog";
-import { formattedUrl } from "@/lib/utils";
 import EditUserCardDialog from "./edit-user-card-dialog";
 import { getDownloadURLFromPath } from "@/lib/firebase";
+import { formatUrl } from "@/lib/utils";
 
 interface UserCardProps {
   profile?: ProfileProps;
@@ -22,6 +22,8 @@ interface UserCardProps {
 }
 
 export default async function UserCard({ profile, isOwner }: UserCardProps) {
+  const icons = [Github, Instagram, Linkedin, Twitter, Plus];
+
   const profileImage =
     (await getDownloadURLFromPath(profile?.imagePath)) || "/perfil.jpeg";
   return (
@@ -57,6 +59,19 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
 
       <div className="flex w-full flex-col gap-2">
         <span className="text-xs font-medium uppercase">Mídias</span>
+
+        {!profile && (
+          <div className="flex items-center gap-2">
+            {icons.map((Icon, index) => (
+              <button
+                key={index}
+                className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]"
+              >
+                <Icon />
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-col gap-4">
           <div className="space-y-2">
@@ -118,35 +133,34 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
       </div>
 
       <div className="flex w-full flex-col gap-4">
-        <div className="flex w-full flex-col gap-2">
-          <span className="text-xs font-medium uppercase">Outros</span>
-          {profile?.link1 && (
-            <Link
-              className="w-full"
-              target="_blank"
-              href={formattedUrl(profile?.link1.url)}
-            >
-              <button className="button-link">{profile.link1.title}</button>
-            </Link>
-          )}
+        {profile && (
+          <div className="flex w-full flex-col gap-2">
+            <span className="text-xs font-medium uppercase">Outros</span>
+            {profile?.link1 && (
+              <Link
+                className="w-full"
+                target="_blank"
+                href={formatUrl(profile?.link1.url)}
+              >
+                <button className="button-link">{profile.link1.title}</button>
+              </Link>
+            )}
 
-          {profile?.link2 && (
-            <Link target="_blank" href={formattedUrl(profile?.link2.url)}>
-              <button className="button-link">{profile.link2.title}</button>
-            </Link>
-          )}
+            {profile?.link2 && (
+              <Link target="_blank" href={formatUrl(profile?.link2.url)}>
+                <button className="button-link">{profile.link2.title}</button>
+              </Link>
+            )}
 
-          {profile?.link3 && (
-            <Link target="_blank" href={formattedUrl(profile?.link3.url)}>
-              <button className="button-link">{profile.link3.title}</button>
-            </Link>
-          )}
-        </div>
-        {isOwner && (
-          <div className="flex flex-col items-center justify-center gap-2">
-            <AddCustomLinkDialog />
+            {profile?.link3 && (
+              <Link target="_blank" href={formatUrl(profile?.link3.url)}>
+                <button className="button-link">{profile.link3.title}</button>
+              </Link>
+            )}
           </div>
         )}
+
+        {isOwner && <AddCustomLinkDialog />}
       </div>
     </div>
   );
