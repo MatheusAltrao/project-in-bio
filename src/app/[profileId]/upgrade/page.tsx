@@ -1,5 +1,6 @@
-import Header from '@/app/(home)/_components/header'
-import Button from '@/app/components/ui/button'
+import Header from "@/app/(home)/_components/header";
+import Button from "@/app/components/ui/button";
+import PlanButtons from "./components/plan-buttons";
 
 export default function UpagradePage() {
   return (
@@ -9,11 +10,9 @@ export default function UpagradePage() {
         <h2 className="text-2xl font-bold text-content-body">
           Escolha o plano
         </h2>
-        <div className="flex gap-4">
-          <Button>R$ 9,90 / mês</Button>
-          <Button>R$ 99,90 / vitalício</Button>
-        </div>
+
+        <PlanButtons />
       </div>
     </div>
-  )
+  );
 }
