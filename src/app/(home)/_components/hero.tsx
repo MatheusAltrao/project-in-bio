@@ -4,7 +4,7 @@ import TextInput from "@/app/components/ui/text-input";
 
 const Hero = () => {
   return (
-    <div className="flex h-screen items-center">
+    <div className="flex mt-[20vh] items-center">
       <div className="grid grid-cols-2 items-center gap-8">
         <div className="space-y-8">
           <div className="space-y-2">
