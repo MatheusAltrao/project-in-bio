@@ -136,7 +136,7 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
         {profile && (
           <div className="flex w-full flex-col gap-2">
             <span className="text-xs font-medium uppercase">Outros</span>
-            {profile?.link1 && (
+            {profile?.link1?.title && profile?.link1?.url && (
               <Link
                 className="w-full"
                 target="_blank"
@@ -146,15 +146,15 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
               </Link>
             )}
 
-            {profile?.link2 && (
-              <Link target="_blank" href={formatUrl(profile?.link2.url)}>
-                <button className="button-link">{profile.link2.title}</button>
+            {profile?.link2?.title && profile?.link2?.url && (
+              <Link target="_blank" href={formatUrl(profile.link2.url)}>
+                <button className="button-link">{profile.link2?.title}</button>
               </Link>
             )}
 
-            {profile?.link3 && (
-              <Link target="_blank" href={formatUrl(profile?.link3.url)}>
-                <button className="button-link">{profile.link3.title}</button>
+            {profile?.link3?.title && profile?.link3?.url && (
+              <Link target="_blank" href={formatUrl(profile.link3.url)}>
+                <button className="button-link">{profile.link3?.title}</button>
               </Link>
             )}
           </div>
