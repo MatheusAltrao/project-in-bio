@@ -1,18 +1,18 @@
-"use server";
-import { db } from "@/lib/firebase";
-import { FieldValue } from "firebase-admin/firestore";
+'use server'
+import { db } from '@/lib/firebase'
+import { FieldValue } from 'firebase-admin/firestore'
 export async function increaseProjectVisitsAction(
   profileId: string,
-  projectId: string
+  projectId: string,
 ) {
   const projectRef = db
-    .collection("profiles")
+    .collection('profiles')
     .doc(profileId)
-    .collection("projects")
-    .doc(projectId);
+    .collection('projects')
+    .doc(projectId)
   await db.runTransaction(async (transaction) => {
-    const projectDoc = await transaction.get(projectRef);
-    if (!projectDoc.exists) return;
-    transaction.update(projectRef, { totalVisits: FieldValue.increment(1) });
-  });
+    const projectDoc = await transaction.get(projectRef)
+    if (!projectDoc.exists) return
+    transaction.update(projectRef, { totalVisits: FieldValue.increment(1) })
+  })
 }

@@ -1,6 +1,6 @@
-import Header from "@/app/(home)/_components/header";
-import Button from "@/app/components/ui/button";
-import PlanButtons from "./components/plan-buttons";
+import Header from '@/app/(home)/_components/header'
+import Button from '@/app/components/ui/button'
+import PlanButtons from './components/plan-buttons'
 
 export default function UpagradePage() {
   return (
@@ -14,5 +14,5 @@ export default function UpagradePage() {
         <PlanButtons />
       </div>
     </div>
-  );
+  )
 }

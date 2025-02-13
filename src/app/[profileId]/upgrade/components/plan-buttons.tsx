@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import Button from "@/app/components/ui/button";
-import useStripe from "@/hooks/use-stripe";
-import { useParams } from "next/navigation";
+import Button from '@/app/components/ui/button'
+import useStripe from '@/hooks/use-stripe'
+import { useParams } from 'next/navigation'
 
 export default function PlanButtons() {
-  const { createStripeCheckout } = useStripe();
-  const { profileId } = useParams();
+  const { createStripeCheckout } = useStripe()
+  const { profileId } = useParams()
 
   return (
     <div className="flex gap-4">
@@ -36,5 +36,5 @@ export default function PlanButtons() {
         R$ 99,90 / vitalício
       </Button>
     </div>
-  );
+  )
 }

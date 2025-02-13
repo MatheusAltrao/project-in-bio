@@ -1,14 +1,14 @@
-"use client";
-import { ProjectProps } from "@/action/project/get-profile-projects-action";
-import { increaseProjectVisitsAction } from "@/action/project/increase-project-visits-action";
-import { formatUrl } from "@/lib/utils";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+'use client'
+import { ProjectProps } from '@/action/project/get-profile-projects-action'
+import { increaseProjectVisitsAction } from '@/action/project/increase-project-visits-action'
+import { formatUrl } from '@/lib/utils'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 interface ProjectCardProps {
-  project?: ProjectProps;
-  isOwner: boolean;
-  image: string;
+  project?: ProjectProps
+  isOwner: boolean
+  image: string
 }
 
 export default function ProjectCard({
@@ -16,19 +16,19 @@ export default function ProjectCard({
   isOwner,
   image,
 }: ProjectCardProps) {
-  const { profileId } = useParams();
-  const projectUrl = project?.projectUrl || "";
-  const url = formatUrl(projectUrl);
+  const { profileId } = useParams()
+  const projectUrl = project?.projectUrl || ''
+  const url = formatUrl(projectUrl)
 
   async function handleClick() {
     if (!profileId || project?.id) {
-      console.log(" project.id", project?.id);
-      console.log("profileId:", profileId);
+      console.log(' project.id', project?.id)
+      console.log('profileId:', profileId)
     }
     await increaseProjectVisitsAction(
       profileId as string,
-      project?.id as string
-    );
+      project?.id as string,
+    )
   }
 
   return (
@@ -49,7 +49,7 @@ export default function ProjectCard({
         <div className="space-y-1">
           {isOwner && (
             <span className="text-xs font-bold uppercase text-accent-green">
-              {project?.totalVisits?.toString().padStart(2, "0") || 0} cliques
+              {project?.totalVisits?.toString().padStart(2, '0') || 0} cliques
             </span>
           )}
 
@@ -62,5 +62,5 @@ export default function ProjectCard({
         </div>
       </div>
     </Link>
-  );
+  )
 }

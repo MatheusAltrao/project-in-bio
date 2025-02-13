@@ -1,12 +1,12 @@
-import { manageAuthAction } from "@/action/auth/manage-auth-action";
-import { getProfileIdAction } from "@/action/user/get-profile-data-action";
-import Button from "@/app/components/ui/button";
-import { auth } from "@/lib/auth";
-import Link from "next/link";
+import { manageAuthAction } from '@/action/auth/manage-auth-action'
+import { getProfileIdAction } from '@/action/user/get-profile-data-action'
+import Button from '@/app/components/ui/button'
+import { auth } from '@/lib/auth'
+import Link from 'next/link'
 
 export default async function Header() {
-  const session = await auth();
-  const profileId = await getProfileIdAction(session?.user?.id as string);
+  const session = await auth()
+  const profileId = await getProfileIdAction(session?.user?.id as string)
 
   return (
     <header>
@@ -21,10 +21,10 @@ export default async function Header() {
           )}
 
           <form action={manageAuthAction}>
-            <Button>{session ? "Sair" : "Entrar"}</Button>
+            <Button>{session ? 'Sair' : 'Entrar'}</Button>
           </form>
         </div>
       </nav>
     </header>
-  );
+  )
 }

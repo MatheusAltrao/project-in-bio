@@ -1,36 +1,36 @@
-"use server";
-import ProjectCard from "../components/commons/project-card";
-import TotalVisits from "../components/commons/total-visits";
-import UserCard from "../components/commons/user-card";
-import Link from "next/link";
-import { getProfileDataAction } from "@/action/user/get-profile-data-action";
-import { notFound, redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
-import NewProjectDialog from "../components/commons/new-project-dialog";
-import getProfileProjectsAction from "@/action/project/get-profile-projects-action";
-import { getDownloadURLFromPath } from "@/lib/firebase";
-import { increaseProfileVisitsAction } from "@/action/user/increase-profile-visits-action";
+'use server'
+import ProjectCard from '../components/commons/project-card'
+import TotalVisits from '../components/commons/total-visits'
+import UserCard from '../components/commons/user-card'
+import Link from 'next/link'
+import { getProfileDataAction } from '@/action/user/get-profile-data-action'
+import { notFound, redirect } from 'next/navigation'
+import { auth } from '@/lib/auth'
+import NewProjectDialog from '../components/commons/new-project-dialog'
+import getProfileProjectsAction from '@/action/project/get-profile-projects-action'
+import { getDownloadURLFromPath } from '@/lib/firebase'
+import { increaseProfileVisitsAction } from '@/action/user/increase-profile-visits-action'
 
 interface ProfilePageProps {
-  params: Promise<{ profileId: string }>;
+  params: Promise<{ profileId: string }>
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
-  const session = await auth();
-  const { profileId } = await params;
+  const session = await auth()
+  const { profileId } = await params
 
-  const profileData = await getProfileDataAction(profileId);
-  if (!profileData) return notFound();
+  const profileData = await getProfileDataAction(profileId)
+  if (!profileData) return notFound()
 
-  const isOnwer = profileData.userId === session?.user?.id;
-  const projects = await getProfileProjectsAction(profileId);
+  const isOnwer = profileData.userId === session?.user?.id
+  const projects = await getProfileProjectsAction(profileId)
 
   if (!isOnwer) {
-    await increaseProfileVisitsAction(profileId);
+    await increaseProfileVisitsAction(profileId)
   }
 
   if (isOnwer && !session?.user.isSubscribed && !session?.user.isTrial) {
-    redirect(`/${profileId}/upgrade`);
+    redirect(`/${profileId}/upgrade`)
   }
 
   return (
@@ -63,7 +63,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             <div className="flex flex-col gap-4 overflow-y-auto">
               {projects.map(async (project) => {
                 const image =
-                  (await getDownloadURLFromPath(project.imagePath)) || "";
+                  (await getDownloadURLFromPath(project.imagePath)) || ''
 
                 return (
                   <ProjectCard
@@ -72,12 +72,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                     image={image}
                     isOwner={isOnwer}
                   />
-                );
+                )
               })}
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -5,27 +5,27 @@ import {
   Linkedin,
   Twitter,
   Plus,
-} from "lucide-react";
-import Button from "../ui/button";
-import Image from "next/image";
-import { EditSocialLinksDialog } from "./edit-social-links-dialog";
-import { ProfileProps } from "@/action/user/get-profile-data-action";
-import Link from "next/link";
-import { AddCustomLinkDialog } from "./add-custom-link-dialog";
-import EditUserCardDialog from "./edit-user-card-dialog";
-import { getDownloadURLFromPath } from "@/lib/firebase";
-import { formatUrl } from "@/lib/utils";
+} from 'lucide-react'
+import Button from '../ui/button'
+import Image from 'next/image'
+import { EditSocialLinksDialog } from './edit-social-links-dialog'
+import { ProfileProps } from '@/action/user/get-profile-data-action'
+import Link from 'next/link'
+import { AddCustomLinkDialog } from './add-custom-link-dialog'
+import EditUserCardDialog from './edit-user-card-dialog'
+import { getDownloadURLFromPath } from '@/lib/firebase'
+import { formatUrl } from '@/lib/utils'
 
 interface UserCardProps {
-  profile?: ProfileProps;
-  isOwner: boolean;
+  profile?: ProfileProps
+  isOwner: boolean
 }
 
 export default async function UserCard({ profile, isOwner }: UserCardProps) {
-  const icons = [Github, Instagram, Linkedin, Twitter, Plus];
+  const icons = [Github, Instagram, Linkedin, Twitter, Plus]
 
   const profileImage =
-    (await getDownloadURLFromPath(profile?.imagePath)) || "/perfil.jpeg";
+    (await getDownloadURLFromPath(profile?.imagePath)) || '/perfil.jpeg'
   return (
     <div className="flex flex-col items-center justify-center gap-5 rounded-3xl border-white border-opacity-10 bg-[#121212] p-8">
       <div className="flex flex-col items-center justify-center gap-2 w-full ">
@@ -42,7 +42,7 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
         <div className="flex items-center flex-col  justify-center">
           <div className="flex items-center gap-2">
             <h3 className="text-3xl font-bold">
-              {profile?.name || "Matheus Altrão"}
+              {profile?.name || 'Matheus Altrão'}
             </h3>
             {isOwner && (
               <EditUserCardDialog
@@ -52,7 +52,7 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
             )}
           </div>
           <p className="opacity-40">
-            {profile?.description || "Dev front-end"}
+            {profile?.description || 'Dev front-end'}
           </p>
         </div>
       </div>
@@ -163,5 +163,5 @@ export default async function UserCard({ profile, isOwner }: UserCardProps) {
         {isOwner && <AddCustomLinkDialog />}
       </div>
     </div>
-  );
+  )
 }

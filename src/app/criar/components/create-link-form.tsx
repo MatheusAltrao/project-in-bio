@@ -1,41 +1,39 @@
-"use client";
-import { createLinkAction } from "@/action/link/create-link-action";
-import { verifyLinkAction } from "@/action/link/verify-link-action";
-import Button from "@/app/components/ui/button";
-import TextInput from "@/app/components/ui/text-input";
-import { sanitizeLink } from "@/lib/utils";
-import { Plus } from "lucide-react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+'use client'
+import { createLinkAction } from '@/action/link/create-link-action'
+import { verifyLinkAction } from '@/action/link/verify-link-action'
+import Button from '@/app/components/ui/button'
+import TextInput from '@/app/components/ui/text-input'
+import { sanitizeLink } from '@/lib/utils'
+import { Plus } from 'lucide-react'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 export default function CreateLinkForm() {
-  const searchParams = useSearchParams();
-  const [link, setLink] = useState(
-    sanitizeLink(searchParams.get("link") || "")
-  );
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const searchParams = useSearchParams()
+  const [link, setLink] = useState(sanitizeLink(searchParams.get('link') || ''))
+  const [error, setError] = useState('')
+  const router = useRouter()
 
   const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(sanitizeLink(e.target.value));
-    setError("");
-  };
+    setLink(sanitizeLink(e.target.value))
+    setError('')
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (link.length < 3) return setError("Escolha o nome do link ");
+    e.preventDefault()
+    if (link.length < 3) return setError('Escolha o nome do link ')
 
-    const isLinkTaken = await verifyLinkAction(link);
+    const isLinkTaken = await verifyLinkAction(link)
 
-    if (isLinkTaken) return setError("Link já está em uso");
+    if (isLinkTaken) return setError('Link já está em uso')
 
-    const isLinkCreated = await createLinkAction(link);
+    const isLinkCreated = await createLinkAction(link)
 
     if (!isLinkCreated)
-      return setError("Erro ao criar o link, tente novamente mais tarde");
+      return setError('Erro ao criar o link, tente novamente mais tarde')
 
-    router.push(`/${link}`);
-  };
+    router.push(`/${link}`)
+  }
 
   return (
     <form onSubmit={handleSubmit} className="w-[600px] flex flex-col gap-3">
@@ -52,5 +50,5 @@ export default function CreateLinkForm() {
         </span>
       )}
     </form>
-  );
+  )
 }

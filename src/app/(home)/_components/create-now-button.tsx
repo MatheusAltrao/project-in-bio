@@ -1,11 +1,11 @@
-"use client";
-import Button from "@/app/components/ui/button";
-import TextInput from "@/app/components/ui/text-input";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+'use client'
+import Button from '@/app/components/ui/button'
+import TextInput from '@/app/components/ui/text-input'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
 
 export default function CreateNowButton() {
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState('')
 
   return (
     <div className="flex items-center gap-2">
@@ -17,7 +17,7 @@ export default function CreateNowButton() {
       />
       <Button
         onClick={() =>
-          signIn("google", {
+          signIn('google', {
             redirectTo: `/criar?link=${link}`,
           })
         }
@@ -25,5 +25,5 @@ export default function CreateNowButton() {
         Criar agora
       </Button>
     </div>
-  );
+  )
 }

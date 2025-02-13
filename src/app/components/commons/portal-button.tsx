@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import useStripe from "@/hooks/use-stripe";
+import useStripe from '@/hooks/use-stripe'
 
 export default function PortalButton() {
-  const { handleCreateStripePortal } = useStripe();
+  const { handleCreateStripePortal } = useStripe()
 
-  return <button onClick={handleCreateStripePortal}>Portal</button>;
+  return <button onClick={handleCreateStripePortal}>Portal</button>
 }

@@ -1,35 +1,35 @@
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/firebase";
-import { stripe } from "@/lib/stripe";
-import { NextResponse } from "next/server";
+import { auth } from '@/lib/auth'
+import { db } from '@/lib/firebase'
+import { stripe } from '@/lib/stripe'
+import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
-  const session = await auth();
-  const userId = session?.user.id;
+  const session = await auth()
+  const userId = session?.user.id
 
   if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const user = await db.collection("users").doc(userId).get();
-  const customerId = user.data()?.customerId;
+  const user = await db.collection('users').doc(userId).get()
+  const customerId = user.data()?.customerId
 
   if (!customerId) {
-    return NextResponse.json({ error: "Customer not found" }, { status: 404 });
+    return NextResponse.json({ error: 'Customer not found' }, { status: 404 })
   }
 
   try {
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${request.headers.get("origin")}`,
-    });
+      return_url: `${request.headers.get('origin')}`,
+    })
 
-    return NextResponse.json({ url: portalSession.url });
+    return NextResponse.json({ url: portalSession.url })
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return NextResponse.json(
-      { error: "Internal server error " },
-      { status: 500 }
-    );
+      { error: 'Internal server error ' },
+      { status: 500 },
+    )
   }
 }

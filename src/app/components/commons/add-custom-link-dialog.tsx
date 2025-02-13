@@ -1,43 +1,43 @@
-"use client";
+'use client'
 
-import { Plus } from "lucide-react";
-import { startTransition, useState } from "react";
-import Modal from "../ui/modal";
-import Button from "../ui/button";
-import TextInput from "../ui/text-input";
-import { useParams, useRouter } from "next/navigation";
+import { Plus } from 'lucide-react'
+import { startTransition, useState } from 'react'
+import Modal from '../ui/modal'
+import Button from '../ui/button'
+import TextInput from '../ui/text-input'
+import { useParams, useRouter } from 'next/navigation'
 import {
   addCustomLinkAction,
   LinkProps,
-} from "@/action/link/add-custom-link-action";
+} from '@/action/link/add-custom-link-action'
 
 export function AddCustomLinkDialog() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const router = useRouter();
-  const params = useParams();
+  const [isOpen, setIsOpen] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const router = useRouter()
+  const params = useParams()
 
-  const profileId = params.profileId as string;
+  const profileId = params.profileId as string
 
   const [link1, setLink1] = useState<LinkProps>({
-    title: "",
-    url: "",
-  });
+    title: '',
+    url: '',
+  })
 
   const [link2, setLink2] = useState<LinkProps>({
-    title: "",
-    url: "",
-  });
+    title: '',
+    url: '',
+  })
 
   const [link3, setLink3] = useState<LinkProps>({
-    title: "",
-    url: "",
-  });
+    title: '',
+    url: '',
+  })
 
   const handleSaveCustomLinks = async () => {
-    setIsSaving(true);
+    setIsSaving(true)
 
-    if (!profileId) return;
+    if (!profileId) return
 
     try {
       await addCustomLinkAction({
@@ -45,17 +45,17 @@ export function AddCustomLinkDialog() {
         link1,
         link2,
         link3,
-      });
+      })
       startTransition(() => {
-        setIsOpen(false);
-        setIsSaving(false);
-        router.refresh();
-      });
+        setIsOpen(false)
+        setIsSaving(false)
+        router.refresh()
+      })
     } catch (error) {
-      console.log(error);
-      return false;
+      console.log(error)
+      return false
     }
-  };
+  }
 
   return (
     <div className="w-full">
@@ -136,5 +136,5 @@ export function AddCustomLinkDialog() {
         </div>
       </Modal>
     </div>
-  );
+  )
 }

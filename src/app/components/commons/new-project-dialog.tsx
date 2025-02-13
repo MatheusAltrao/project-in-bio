@@ -1,66 +1,60 @@
-"use client";
-import { Plus, Upload } from "lucide-react";
-import Modal from "../ui/modal";
-import { startTransition, useState } from "react";
-import Button from "../ui/button";
-import TextInput from "../ui/text-input";
-import Textarea from "../ui/textarea";
-import Image from "next/image";
-import {
-  compressFiles,
-  handleImageInput,
-  triggerImageInput,
-} from "@/lib/utils";
-import { createProjectAction } from "@/action/project/create-project-action";
-import { useRouter } from "next/navigation";
+'use client'
+import { Plus, Upload } from 'lucide-react'
+import Modal from '../ui/modal'
+import { startTransition, useState } from 'react'
+import Button from '../ui/button'
+import TextInput from '../ui/text-input'
+import Textarea from '../ui/textarea'
+import Image from 'next/image'
+import { compressFiles, handleImageInput, triggerImageInput } from '@/lib/utils'
+import { createProjectAction } from '@/action/project/create-project-action'
+import { useRouter } from 'next/navigation'
 
 interface NewProjectDialogProps {
-  profileId: string;
-  isOnwer: boolean;
+  profileId: string
+  isOnwer: boolean
 }
 
 export default function NewProjectDialog({
   profileId,
   isOnwer,
 }: NewProjectDialogProps) {
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const [projectName, setProjectName] = useState("");
-  const [projectUrl, setProjectUrl] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectImage, setProjectImage] = useState<string | null>(null);
-  const [isCreatingProject, setIsCreatingProject] = useState(false);
+  const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+  const [projectName, setProjectName] = useState('')
+  const [projectUrl, setProjectUrl] = useState('')
+  const [projectDescription, setProjectDescription] = useState('')
+  const [projectImage, setProjectImage] = useState<string | null>(null)
+  const [isCreatingProject, setIsCreatingProject] = useState(false)
 
   async function handleCreateProject() {
-    setIsCreatingProject(true);
-    const imageInput = document.getElementById(
-      "imageInput"
-    ) as HTMLInputElement;
-    if (!imageInput.files) return;
+    setIsCreatingProject(true)
+    const imageInput = document.getElementById('imageInput') as HTMLInputElement
+    if (!imageInput.files) return
 
-    const compressedFile = await compressFiles(Array.from(imageInput.files));
+    const compressedFile = await compressFiles(Array.from(imageInput.files))
 
-    const formData = new FormData();
-    formData.append("file", compressedFile[0]);
-    formData.append("profileId", profileId);
-    formData.append("projectName", projectName);
-    formData.append("projectUrl", projectUrl);
-    formData.append("projectDescription", projectDescription);
+    const formData = new FormData()
+    formData.append('file', compressedFile[0])
+    formData.append('profileId', profileId)
+    formData.append('projectName', projectName)
+    formData.append('projectUrl', projectUrl)
+    formData.append('projectDescription', projectDescription)
 
-    await createProjectAction(formData);
+    await createProjectAction(formData)
 
     startTransition(() => {
-      setIsOpen(false);
-      setIsCreatingProject(false);
-      setProjectDescription("");
-      setProjectName("");
-      setProjectUrl("");
-      setProjectImage(null);
-      router.refresh();
-    });
+      setIsOpen(false)
+      setIsCreatingProject(false)
+      setProjectDescription('')
+      setProjectName('')
+      setProjectUrl('')
+      setProjectImage(null)
+      router.refresh()
+    })
   }
 
-  if (!isOnwer) return null;
+  if (!isOnwer) return null
 
   return (
     <div className="w-full">
@@ -79,7 +73,7 @@ export default function NewProjectDialog({
 
           <div className="flex  gap-16">
             <button
-              onClick={() => triggerImageInput("imageInput")}
+              onClick={() => triggerImageInput('imageInput')}
               className="flex flex-col items-center gap-2  w-max"
             >
               {projectImage ? (
@@ -97,7 +91,7 @@ export default function NewProjectDialog({
               )}
 
               <div className="flex items-center gap-2">
-                <Upload size={18} />{" "}
+                <Upload size={18} />{' '}
                 <span className="text-sm"> Adicionar imagem</span>
               </div>
             </button>
@@ -162,5 +156,5 @@ export default function NewProjectDialog({
         </div>
       </Modal>
     </div>
-  );
+  )
 }

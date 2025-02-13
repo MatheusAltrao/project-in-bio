@@ -1,44 +1,44 @@
-"use server";
+'use server'
 
-import { auth } from "@/lib/auth";
-import { db, storage } from "@/lib/firebase";
-import { randomUUID } from "crypto";
-import { Timestamp } from "firebase-admin/firestore";
+import { auth } from '@/lib/auth'
+import { db, storage } from '@/lib/firebase'
+import { randomUUID } from 'crypto'
+import { Timestamp } from 'firebase-admin/firestore'
 
 export async function createProjectAction(formData: FormData) {
-  const session = await auth();
+  const session = await auth()
 
-  if (!session?.user) return;
+  if (!session?.user) return
 
-  const profileId = formData.get("profileId") as string;
-  const projectName = formData.get("projectName") as string;
-  const projectUrl = formData.get("projectUrl") as string;
-  const projectDescription = formData.get("projectDescription") as string;
-  const file = formData.get("file") as File;
+  const profileId = formData.get('profileId') as string
+  const projectName = formData.get('projectName') as string
+  const projectUrl = formData.get('projectUrl') as string
+  const projectDescription = formData.get('projectDescription') as string
+  const file = formData.get('file') as File
 
   if (!file) {
-    console.error("File is missing in formData");
-    return false;
+    console.error('File is missing in formData')
+    return false
   }
 
   if (!profileId || !projectName || !projectUrl || !projectDescription) {
-    console.error("One or more required fields are missing");
-    return false;
+    console.error('One or more required fields are missing')
+    return false
   }
 
-  const generatedId = randomUUID();
+  const generatedId = randomUUID()
 
-  const storageRef = storage.file(`project-images/${profileId}/${generatedId}`);
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  await storageRef.save(buffer);
-  const imagePath = storageRef.name;
+  const storageRef = storage.file(`project-images/${profileId}/${generatedId}`)
+  const arrayBuffer = await file.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+  await storageRef.save(buffer)
+  const imagePath = storageRef.name
 
   try {
     await db
-      .collection("profiles")
+      .collection('profiles')
       .doc(profileId)
-      .collection("projects")
+      .collection('projects')
       .doc(generatedId)
       .set({
         id: generatedId,
@@ -48,11 +48,11 @@ export async function createProjectAction(formData: FormData) {
         projectDescription,
         imagePath,
         createdAt: Timestamp.now().toMillis(),
-      });
+      })
 
-    return true;
+    return true
   } catch (error) {
-    console.log(error);
-    return false;
+    console.log(error)
+    return false
   }
 }

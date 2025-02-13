@@ -1,5 +1,5 @@
-import UserCard from "@/app/components/commons/user-card";
-import CreateNowButton from "./create-now-button";
+import UserCard from '@/app/components/commons/user-card'
+import CreateNowButton from './create-now-button'
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
