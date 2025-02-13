@@ -31,7 +31,9 @@ export async function getProfileDataAction(profileId: string) {
   return snapshot.data() as ProfileProps;
 }
 
-export async function getProfileIdAction(userId: string) {
+export async function getProfileIdAction(userId: string | undefined) {
+  if (!userId) return;
+
   const snapshot = await db
     .collection("profiles")
     .where("userId", "==", userId)
