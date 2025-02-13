@@ -34,6 +34,11 @@ export default function NewProjectDialog({
 
     const compressedFile = await compressFiles(Array.from(imageInput.files))
 
+    if (!profileId || compressedFile.length === 0 || !compressedFile[0]) {
+      setIsCreatingProject(false)
+      return
+    }
+
     const formData = new FormData()
     formData.append('file', compressedFile[0])
     formData.append('profileId', profileId)

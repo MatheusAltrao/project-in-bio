@@ -42,7 +42,10 @@ export default function EditUserCardDialog({
 
     const compressedFile = await compressFiles(Array.from(imageInput.files))
 
-    if (!profileId) return
+    if (!profileId || compressedFile.length === 0 || !compressedFile[0]) {
+      setIsSaving(false)
+      return
+    }
     const formData = new FormData()
 
     formData.append('profileId', profileId as string)
