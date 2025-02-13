@@ -14,10 +14,10 @@ declare module "next-auth" {
       isTrial: boolean;
     } & DefaultSession["user"];
   }
-
   interface User {
     createdAt: number;
     isTrial?: boolean;
+    isSubscribed?: boolean;
   }
 }
 
@@ -26,12 +26,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [Google],
   events: {
     createUser: async ({ user }) => {
-      await db
-        .collection("users")
-        .doc(user.id?.toString() as string)
-        .update({
-          createdAt: Timestamp.now().toMillis(),
-        });
+      if (!user.id) return;
+      await db.collection("users").doc(user.id).update({
+        createdAt: Timestamp.now().toMillis(),
+      });
     },
   },
   callbacks: {

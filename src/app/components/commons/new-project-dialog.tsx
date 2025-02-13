@@ -16,12 +16,12 @@ import { useRouter } from "next/navigation";
 
 interface NewProjectDialogProps {
   profileId: string;
-  isOwer: boolean;
+  isOnwer: boolean;
 }
 
 export default function NewProjectDialog({
   profileId,
-  isOwer,
+  isOnwer,
 }: NewProjectDialogProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function NewProjectDialog({
     });
   }
 
-  if (!isOwer) return null;
+  if (!isOnwer) return null;
 
   return (
     <div className="w-full">
