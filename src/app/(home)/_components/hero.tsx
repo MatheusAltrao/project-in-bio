@@ -1,6 +1,5 @@
 import UserCard from "@/app/components/commons/user-card";
-import Button from "@/app/components/ui/button";
-import TextInput from "@/app/components/ui/text-input";
+import CreateNowButton from "./create-now-button";
 
 const Hero = () => {
   return (
@@ -17,11 +16,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <p>projectinbio.com/</p>
-            <TextInput type="text" placeholder="seu link" />
-            <Button>Criar agora</Button>
-          </div>
+          <CreateNowButton />
         </div>
         <div className="h-full w-full bg-[radial-gradient(circle_at_40%_40%,#4B2DBB,transparent_50%)]">
           <div className="relative flex w-full items-center justify-center">

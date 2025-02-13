@@ -30,3 +30,11 @@ export async function getProfileDataAction(profileId: string) {
 
   return snapshot.data() as ProfileProps;
 }
+
+export async function getProfileIdAction(userId: string) {
+  const snapshot = await db
+    .collection("profiles")
+    .where("userId", "==", userId)
+    .get();
+  return snapshot.docs[0].id;
+}
