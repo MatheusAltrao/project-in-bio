@@ -1,0 +1,9 @@
+# *
+
+User-agent: *
+Allow:/
+
+#host https://project-in-bio-rho.vercel.app/
+
+#Sitemap:
+Sitemap: https://project-in-bio-rho.vercel.app/sitemap.xml
