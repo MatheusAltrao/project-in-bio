@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata } from 'next'
 
 export function getSEOTags({
   appName,
@@ -9,18 +9,18 @@ export function getSEOTags({
   extraTags,
   locale,
 }: {
-  appName: string;
-  appDescription: string;
-  keywords: string[];
-  appDomain: string;
-  canonicalUrlRelative: string;
-  extraTags?: Metadata;
-  locale?: string;
+  appName: string
+  appDescription: string
+  keywords: string[]
+  appDomain: string
+  canonicalUrlRelative: string
+  extraTags?: Metadata
+  locale?: string
 }): Metadata {
   return {
     title: appName,
     description: appDescription,
-    keywords: keywords.join(", "),
+    keywords: keywords.join(', '),
     applicationName: appName,
     metadataBase: new URL(appDomain),
 
@@ -29,15 +29,15 @@ export function getSEOTags({
       description: appDescription,
       url: appDomain,
       siteName: appName,
-      locale: locale,
-      type: "website",
+      locale,
+      type: 'website',
     },
 
     twitter: {
       title: appName,
       description: appDescription,
-      card: "summary_large_image",
-      creator: "@matheus_altrao",
+      card: 'summary_large_image',
+      creator: '@matheus_altrao',
     },
 
     alternates: {
@@ -48,5 +48,5 @@ export function getSEOTags({
     },
 
     ...extraTags,
-  };
+  }
 }
