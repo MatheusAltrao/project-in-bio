@@ -1,8 +1,13 @@
 import { Rocket } from 'lucide-react'
 import Header from '../(home)/_components/header'
 import CreateLinkForm from './components/create-link-form'
+import { trackServerEvent } from '@/lib/mixpanel'
 
 export default function CriarPage() {
+  trackServerEvent('page_view', {
+    page: 'criar',
+  })
+
   return (
     <div className="mx-auto w-full max-w-7xl px-2 py-4">
       <Header />
